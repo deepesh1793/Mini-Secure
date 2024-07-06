@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Contract, BrowserProvider } from "ethers";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EvidenceStorage from "./abi/EvidenceStorage.json";
 import Navbar from "./components/Navbar";
 import Judge from './components/Judge';
 import Police from './components/Police';
+import Retrieve from "./components/Retrieve";
+import Upload from "./components/Upload";
+import Authorize from "./components/Authorize";
+import Approve from "./components/Approve";
 
 function App() {
   const [role, setRole] = useState(null);
   const [account, setAccount] = useState(null);
   const [evidenceContract, setEvidenceContract] = useState(null)
-  const EVIDENCE_CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+  const EVIDENCE_CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3" //Bring it in from the json file
   const [isWalletConnected, setIsWalletConnected] = useState(false)
   const [isWalletInstalled, setIsWalletInstalled] = useState(false);
 
@@ -36,6 +41,7 @@ function App() {
       const provider = new BrowserProvider(window.ethereum)
       provider.getSigner().then((signer) => {
         setEvidenceContract(new Contract(EVIDENCE_CONTRACT_ADDRESS, EvidenceStorage.abi, signer))
+        console.log(account)
       }).catch((error) => {
         console.error("Error initializing contract:")
       })
@@ -55,19 +61,38 @@ function App() {
         } catch (error) {
           console.error("Error fetching role:", error);
         }
+        setRole("police"); //Change this
       }
     };
     getRole();
   }, [evidenceContract, account]);
 
+  const judgeRoutes = (
+    <>
+      <Route path="/" element={<Judge />} />
+      <Route path="/retrieve" element={<Retrieve />} />
+      <Route path="/upload" element={<Upload />} />
+      <Route path="/authorize" element={<Authorize evidenceContract={evidenceContract} />} />
+      <Route path="/approve" element={<Approve evidenceContract={evidenceContract} />} />
+    </>
+  );
+
+  const policeRoutes = (
+    <>
+      <Route path="/" element={<Police />} />
+      <Route path="/retrieve" element={<Retrieve />} />
+      <Route path="/upload" element={<Upload />} />
+    </>
+  );
+
   return (
     <div>
       <Navbar connectWallet={connectWallet} isWalletConnected={isWalletConnected} isWalletInstalled={isWalletInstalled} />
       {account && (
-        <div>
-          {role === 'judge' && <Judge />}
-          {role === 'police' && <Police />}
-        </div>
+        <Routes>
+          {role === 'judge' && judgeRoutes}
+          {role === 'police' && policeRoutes}
+        </Routes>
       )}
     </div>
   );
