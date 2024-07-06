@@ -70,8 +70,8 @@ function App() {
   const judgeRoutes = (
     <>
       <Route path="/" element={<Judge />} />
-      <Route path="/retrieve" element={<Retrieve />} />
-      <Route path="/upload" element={<Upload />} />
+      <Route path="/retrieve" element={<Retrieve evidenceContract={evidenceContract} />} />
+      <Route path="/upload" element={<Upload evidenceContract={evidenceContract} />} />
       <Route path="/authorize" element={<Authorize evidenceContract={evidenceContract} />} />
       <Route path="/approve" element={<Approve evidenceContract={evidenceContract} />} />
     </>
@@ -80,8 +80,8 @@ function App() {
   const policeRoutes = (
     <>
       <Route path="/" element={<Police />} />
-      <Route path="/retrieve" element={<Retrieve />} />
-      <Route path="/upload" element={<Upload />} />
+      <Route path="/retrieve" element={<Retrieve evidenceContract={evidenceContract} />} />
+      <Route path="/upload" element={<Upload evidenceContract={evidenceContract} />} />
     </>
   );
 

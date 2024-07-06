@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-function Upload() {
+const Upload = ({ evidenceContract }) => {
     const [evidenceId, setEvidenceId] = useState('');
     const [file, setFile] = useState(null);
     const [uploading, setUploading] = useState(false);
     const [ipfsHash, setIpfsHash] = useState('');
+    const [message, setMessage] = useState('');
 
     const handleEvidenceIdChange = (event) => {
         setEvidenceId(event.target.value);
@@ -52,10 +53,16 @@ function Upload() {
             }
 
             const responseData = await response.json();
-            setIpfsHash(responseData.IpfsHash); // Assuming responseData structure
+            const generatedIpfsHash = responseData.IpfsHash;
+            setIpfsHash(generatedIpfsHash); // Assuming responseData structure
 
-            console.log("File uploaded successfully. IPFS Hash:", responseData.IpfsHash);
+            console.log("File uploaded successfully. IPFS Hash:", generatedIpfsHash);
+
+            // Call the smart contract function to store the IPFS hash
+            await evidenceContract.uploadEvidence(evidenceId, generatedIpfsHash);
+            setMessage("Evidence uploaded and recorded on the blockchain successfully.");
         } catch (error) {
+            setMessage(`Error uploading file: ${error.message}`);
             console.error("Error uploading file:", error);
         } finally {
             setUploading(false); // Reset uploading state after upload completes
@@ -98,6 +105,11 @@ function Upload() {
                     {uploading ? 'Uploading...' : 'Upload Evidence'}
                 </button>
             </div>
+            {message && (
+                <div className="mt-4 text-green-500">
+                    {message}
+                </div>
+            )}
             {ipfsHash && (
                 <div className="mt-4 text-green-500">
                     File uploaded successfully! IPFS Hash: {ipfsHash}

@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-const Retrieve = () => {
+const Retrieve = ({ evidenceContract }) => {
     const [cid, setCid] = useState(null);
     const [evidenceId, setEvidenceId] = useState('');
+    const [error, setError] = useState(null);
 
     const handleInputChange = (event) => {
         setEvidenceId(event.target.value);
     };
 
-    const handleRetrieve = () => {
-        // Simulate retrieving CID using evidence ID
-        const simulatedCid = 'QmfYcrSBewzZ6SUu64QezkFZoLcmYc2MdtXD1fQ2ahGHCi'; // This should be replaced with actual retrieval logic
-        setCid(simulatedCid);
+    const handleRetrieve = async () => {
+        try {
+            const retrievedCid = await evidenceContract.getEvidence(evidenceId);
+            setCid(retrievedCid);
+            setError(null);
+        } catch (error) {
+            setError('Failed to retrieve evidence. Please try again.');
+            console.error('Error retrieving evidence:', error);
+        }
     };
-
-    useEffect(() => {
-        // Optionally, initialize cid or perform other setup actions here if needed
-    }, []);
 
     return (
         <div className="max-w-lg mx-auto p-4 bg-white shadow-md rounded">
@@ -40,11 +42,16 @@ const Retrieve = () => {
                     Retrieve Evidence
                 </button>
             </div>
+            {error && (
+                <div className="mt-4 text-red-600">
+                    {error}
+                </div>
+            )}
             {cid && (
                 <div className="mt-4">
                     <img
                         src={`${process.env.REACT_APP_GATEWAY_URL}/ipfs/${cid}`}
-                        alt="ipfs image"
+                        alt="IPFS Evidence"
                         className="max-w-full h-auto"
                     />
                 </div>
