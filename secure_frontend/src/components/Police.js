@@ -2,7 +2,7 @@
 import React from 'react';
 import Card from './Cards';
 
-const Judge = () => {
+const Police = () => {
     const handleButtonClick = (cardTitle) => {
         alert(`Button clicked on ${cardTitle}`);
     };
@@ -30,15 +30,9 @@ const Judge = () => {
                 buttonText="Click Me 3"
                 onButtonClick={() => handleButtonClick('Card 3')}
             />
-            <Card
-                imageSrc="https://via.placeholder.com/300"
-                title="approve"
-                description="This is the description for card 4."
-                buttonText="Click Me 4"
-                onButtonClick={() => handleButtonClick('Card 4')}
-            />
+            
         </div>
     );
 };
 
-export default Judge;
+export default Police;
