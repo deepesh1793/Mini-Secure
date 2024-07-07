@@ -14,7 +14,7 @@ function App() {
   const [role, setRole] = useState(null);
   const [account, setAccount] = useState(null);
   const [evidenceContract, setEvidenceContract] = useState(null)
-  const EVIDENCE_CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3" //Bring it in from the json file
+  const EVIDENCE_CONTRACT_ADDRESS = "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e" //Bring it in from the json file
   const [isWalletConnected, setIsWalletConnected] = useState(false)
   const [isWalletInstalled, setIsWalletInstalled] = useState(false);
 
@@ -57,11 +57,11 @@ function App() {
       if (evidenceContract && account) {
         try {
           const userRole = await evidenceContract.getRole(account);
+          console.log(userRole)
           setRole(userRole);
         } catch (error) {
           console.error("Error fetching role:", error);
         }
-        setRole("police"); //Change this
       }
     };
     getRole();

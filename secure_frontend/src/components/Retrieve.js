@@ -11,12 +11,12 @@ const Retrieve = ({ evidenceContract }) => {
 
     const handleRetrieve = async () => {
         try {
-            const retrievedCid = await evidenceContract.getEvidence(evidenceId);
-            setCid(retrievedCid);
-            setError(null);
+            const evidenceData = await evidenceContract.getEvidence(evidenceId);
+            const ipfsHash = evidenceData[0]; // Assuming ipfsHash is the first return value
+            setCid(ipfsHash);
         } catch (error) {
-            setError('Failed to retrieve evidence. Please try again.');
-            console.error('Error retrieving evidence:', error);
+            console.error("Error retrieving evidence:", error.message);
+            setError("Error retrieving evidence. Please try again.");
         }
     };
 

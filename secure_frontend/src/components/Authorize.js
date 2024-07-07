@@ -11,7 +11,7 @@ const Authorize = ({ evidenceContract }) => {
       if (!evidenceContract) {
         throw new Error('Contract not initialized.');
       }
-      await evidenceContract.authorizeEvidence(evidenceId, accountAddress);
+      await evidenceContract.approveEvidence(evidenceId, accountAddress);
       setMessage('Authorization successful.');
     } catch (error) {
       setMessage(`Authorization failed: ${error.message}`);
