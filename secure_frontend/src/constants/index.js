@@ -18,6 +18,24 @@ export const navLinks = [
         title: "Voices on Justice",
     },
 ];
+export const navLinks2 = [
+    {
+        id: "/upload",
+        title: "Upload",
+    },
+    {
+        id: "/retrieve",
+        title: "Retrieve",
+    },
+    {
+        id: "/approve",
+        title: "Approve",
+    },
+    {
+        id: "/authenticate",
+        title: "Authenticate",
+    },
+];
 
 export const features = [
     {

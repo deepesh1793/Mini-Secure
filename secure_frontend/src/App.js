@@ -3,6 +3,7 @@ import { Contract, BrowserProvider } from "ethers";
 import { Routes, Route } from "react-router-dom";
 import EvidenceStorage from "./abi/EvidenceStorage.json";
 import Navbar from "./components/Navbar";
+import Navbar2 from "./components/Navbar2";
 import Judge from './components/Judge';
 import Police from './components/Police';
 import Retrieve from "./components/Retrieve";
@@ -87,36 +88,47 @@ function App() {
   );
 
   return (
-    <div className="bg-primary w-full overflow-hidden">
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Navbar connectWallet={connectWallet} isWalletConnected={isWalletConnected} isWalletInstalled={isWalletInstalled} />
-        </div>
-      </div>
+    <div>
       {!account ? (
         <>
-          <div className={`bg-primary ${styles.flexStart}`}>
-            <div className={`${styles.boxWidth}`}>
-              <Hero />
+          <div className="bg-primary w-full overflow-hidden">
+            <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+              <div className={`${styles.boxWidth}`}>
+                <Navbar connectWallet={connectWallet} isWalletConnected={isWalletConnected} isWalletInstalled={isWalletInstalled} />
+              </div>
             </div>
-          </div>
-          <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
-            <div className={`${styles.boxWidth}`}>
-              <Stats />
-              <Business />
-              <Billing />
-              <CardDeal />
-              <Testimonials />
-              <CTA />
-              <Footer />
+            <div className={`bg-primary ${styles.flexStart}`}>
+              <div className={`${styles.boxWidth}`}>
+                <Hero />
+              </div>
+            </div>
+            <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
+              <div className={`${styles.boxWidth}`}>
+                <Stats />
+                <Business />
+                <Billing />
+                <CardDeal />
+                <Testimonials />
+                <CTA />
+                <Footer />
+              </div>
             </div>
           </div>
         </>
       ) : (
-        <Routes>
-          {role === 'judge' && (judgeRoutes)}
-          {role === 'police' && policeRoutes}
-        </Routes>
+        <>
+          <div className="bg-primary w-full overflow-hidden">
+            <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+              <div className={`${styles.boxWidth}`}>
+                <Navbar2 connectWallet={connectWallet} isWalletConnected={isWalletConnected} isWalletInstalled={isWalletInstalled} />
+              </div>
+            </div>
+          </div>
+          <Routes>
+            {role === 'judge' && (judgeRoutes)}
+            {role === 'police' && policeRoutes}
+          </Routes>
+        </>
       )}
     </div>
   );
