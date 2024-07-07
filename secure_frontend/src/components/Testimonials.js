@@ -11,12 +11,12 @@ const Testimonials = () => (
 
 		<div className="mx-auto flex justify-between items-center md:flex-row flex-col sm:mb-16 mb-6 relative z-[1] lg:gap-20">
 			<h2 className={styles.heading2}>
-			Words of Wisdom, <br className="sm:block hidden" />on Justice.
+				Words of Wisdom, <br className="sm:block hidden" />on Justice.
 			</h2>
 			<div className="w-full md:mt-0 mt-6">
 				<p className={`${styles.paragraph} text-left max-w-[450px]`}>
-				
-				Explore profound perspectives from influential figures, both global and Indian, highlighting the importance of integrity in justice and the preservation of secure evidence.
+
+					Explore profound perspectives from influential figures, both global and Indian, highlighting the importance of integrity in justice and the preservation of secure evidence.
 				</p>
 			</div>
 		</div>

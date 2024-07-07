@@ -1,4 +1,4 @@
-import { people01, MG, people02, people03, facebook, instagram, linkedin, twitter, airbnb, binance, coinbase, dropbox, send, shield, star, MLK, ER } from "../assets";
+import { MG, facebook, instagram, linkedin, twitter, airbnb, binance, coinbase, dropbox, send, shield, star, MLK, ER } from "../assets";
 
 export const navLinks = [
     {
@@ -10,11 +10,11 @@ export const navLinks = [
         title: "Features",
     },
     {
-        id: "product",
+        id: "technology",
         title: "Technology",
     },
     {
-        id: "clients",
+        id: "Voices-on-Justice",
         title: "Voices on Justice",
     },
 ];
