@@ -24,7 +24,7 @@ const Navbar2 = ({ connectWallet, isWalletConnected, isWalletInstalled }) => {
                     ))}
                 </ul>
 
-                <div className="relative flex h-16 items-center justify-end">
+                <div className="relative flex h-16 items-center bg-blue-gradient justify-end">
                     {isWalletInstalled ? (
                         <button
                             className="text-white px-6 py-2 rounded hover:bg-gray-200 hover:text-black transition-colors"
